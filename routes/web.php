@@ -30,7 +30,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Protected routes (require admin session)
     Route::middleware('admin.auth')->group(function () {
-        Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('/', function () {
+            return redirect()->route('admin.dashboard');
+        });
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('/patients', [AdminController::class, 'patients'])->name('patients');
         Route::get('/patients/{id}', [AdminController::class, 'patientDetails'])->name('patients.show');
         Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
@@ -64,9 +67,11 @@ Route::prefix('hospital')->name('hospital.')->group(function () {
         Route::put('/appointments/{id}/status', [HospitalController::class, 'updateAppointmentStatus'])->name('appointments.update-status');
 
         // COVID test routes
+        Route::get('/appointments/{id}/covid-test', [HospitalController::class, 'showCovidTestForm'])->name('appointments.covid-test-form');
         Route::post('/appointments/{id}/covid-test', [HospitalController::class, 'storeCovidTestResult'])->name('appointments.covid-test');
 
         // Vaccination routes
+        Route::get('/appointments/{id}/vaccination', [HospitalController::class, 'showVaccinationForm'])->name('appointments.vaccination-form');
         Route::post('/appointments/{id}/vaccination', [HospitalController::class, 'storeVaccinationRecord'])->name('appointments.vaccination');
 
         // Profile routes
