@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.hospital')
 
 @section('title', 'Appointment Details - Hospital')
 
@@ -261,17 +261,29 @@
                             </div>
                             <div class="col-md-4">
                                 @if ($appointment->type == 'covid_test' && !$appointment->covidTestResult)
-                                    <button type="button" class="btn btn-warning w-100" data-bs-toggle="modal"
-                                        data-bs-target="#covidTestModal">
-                                        <i class="fas fa-virus me-2"></i>
-                                        Add Test Result
-                                    </button>
+                                    <div class="d-grid gap-2">
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#covidTestModal">
+                                            <i class="fas fa-virus me-2"></i>
+                                            Add Test Result (Quick)
+                                        </button>
+                                        <a href="{{ route('hospital.appointments.covid-test-form', $appointment->id) }}" class="btn btn-outline-warning">
+                                            <i class="fas fa-external-link-alt me-2"></i>
+                                            Full Form
+                                        </a>
+                                    </div>
                                 @elseif($appointment->type == 'vaccination' && !$appointment->vaccinationRecord)
-                                    <button type="button" class="btn btn-info w-100" data-bs-toggle="modal"
-                                        data-bs-target="#vaccinationModal">
-                                        <i class="fas fa-syringe me-2"></i>
-                                        Add Vaccination Record
-                                    </button>
+                                    <div class="d-grid gap-2">
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                            data-bs-target="#vaccinationModal">
+                                            <i class="fas fa-syringe me-2"></i>
+                                            Add Vaccination (Quick)
+                                        </button>
+                                        <a href="{{ route('hospital.appointments.vaccination-form', $appointment->id) }}" class="btn btn-outline-info">
+                                            <i class="fas fa-external-link-alt me-2"></i>
+                                            Full Form
+                                        </a>
+                                    </div>
                                 @else
                                     <button type="button" class="btn btn-secondary w-100" disabled>
                                         <i class="fas fa-check me-2"></i>
