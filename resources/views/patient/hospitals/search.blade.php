@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.patient')
 
 @section('title', 'Search Hospitals - COVID Vaccination System')
 

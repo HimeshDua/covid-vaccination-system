@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.patient')
 
 @section('title', 'COVID-19 Test Results - Patient')
 
